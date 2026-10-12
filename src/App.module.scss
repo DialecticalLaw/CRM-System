@@ -1,0 +1,40 @@
+.app {
+  display: flex;
+  height: 100%;
+}
+
+.title {
+  padding: 2rem;
+}
+
+.sidebar {
+  height: 100%;
+  background-color: var(--color-bg-secondary);
+  border-right: 0.1rem solid var(--color-bg-tertiary);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.navLink {
+  padding: 1rem;
+  font-weight: 400;
+  color: #000000;
+  text-decoration: none;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  &:active {
+    background-color: var(--color-accent-active);
+  }
+}
+
+.navActive {
+  color: var(--color-accent);
+  font-weight: 700;
+}
