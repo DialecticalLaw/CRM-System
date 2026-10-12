@@ -1,11 +1,41 @@
-.board {
-  width: 100%;
+.wrapper {
   height: 100%;
-  padding: 2rem;
+  display: grid;
+  grid-template-rows: auto auto 90%;
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem 2rem 0 2rem;
 }
 
 .topWrapper {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.hr {
+  width: 100%;
+  height: 0.1rem;
+  background-color: var(--color-bg-tertiary);
+}
+
+.columns {
+  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(7, 27rem);
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.column {
+  height: 100%;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-bg-secondary);
+}
+
+.columnTitle {
+  color: var(--color-text-secondary);
+  text-align: center;
 }
