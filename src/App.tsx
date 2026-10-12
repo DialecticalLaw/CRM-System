@@ -1,7 +1,14 @@
-import "./App.scss";
+import { Outlet } from "react-router";
 
-function App() {
-  return <div>App</div>;
+export function App() {
+  return (
+    <div>
+      <aside>
+        <h1>CRM-System</h1>
+      </aside>
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
 }
-
-export default App;
