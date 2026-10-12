@@ -1,0 +1,23 @@
+.wrapper {
+  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(7, 27rem);
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  height: 100%;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-bg-secondary);
+}
+
+.columnTitle {
+  color: var(--color-text-secondary);
+  text-align: center;
+}
