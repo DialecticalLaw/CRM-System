@@ -5,9 +5,11 @@
 }
 
 :root {
-  --color-accent: rgb(0, 94, 255);
-  --color-accent-hover: #deebff;
-  --color-accent-active: #bad6ff;
+  --color-accent: #005eff;
+  --color-accent-hover: #0041b1;
+  --color-accent-active: #003592;
+  --color-accent-light-hover: #deebff;
+  --color-accent-light-active: #bad6ff;
 
   --color-text: #000000;
   --color-text-secondary: #5a6578;
@@ -23,7 +25,8 @@ html {
 }
 
 body,
-#root {
+#root,
+main {
   height: 100%;
 }
 
@@ -40,6 +43,7 @@ button,
 textarea,
 h1,
 h2 {
+  color: var(--color-text);
   font-size: 1.6rem;
   font-family: "OpenSans";
 }

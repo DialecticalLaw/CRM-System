@@ -26,7 +26,7 @@ export function App() {
         </nav>
       </aside>
 
-      <main>
+      <main className={styles.main}>
         <Outlet />
       </main>
     </div>
