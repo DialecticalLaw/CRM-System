@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateTaskModal } from "../../components/CreateTaskModal/CreateTaskModal";
 import { KanbanBoard } from "../../components/KanbanBoard/KanbanBoard";
 import { Button } from "../../components/ui/Button/Button";
 import styles from "./Board.module.scss";
+import type { TaskListResponse } from "../../api/model";
+import { getTasks } from "../../api/getTasks";
 
 export function Board() {
   const [isActive, setIsActive] = useState(false);
+  const [tasks, setTasks] = useState<TaskListResponse | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      const data = await getTasks();
+      setTasks(data);
+    };
+
+    load();
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -15,8 +27,12 @@ export function Board() {
       </div>
 
       <div className={styles.hr} />
-      <KanbanBoard />
-      <CreateTaskModal isActive={isActive} setIsActive={setIsActive} />
+      <KanbanBoard tasks={tasks} />
+      <CreateTaskModal
+        setTasks={setTasks}
+        isActive={isActive}
+        setIsActive={setIsActive}
+      />
     </div>
   );
 }

@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { TASK_STATUSES, type TaskStatus } from "../../api/model";
+import {
+  TASK_STATUSES,
+  type TaskListResponse,
+  type TaskStatus,
+} from "../../api/model";
 import { Textarea } from "../ui/inputs/Textarea/Textarea";
 import styles from "./CreateTaskModal.module.scss";
 import { Select } from "../ui/inputs/Select/Select";
@@ -7,6 +11,7 @@ import { DateSelect } from "../ui/inputs/DateSelect/DateSelect";
 import { localToUtc } from "../../helpers/date";
 import { Button } from "../ui/Button/Button";
 import { createTask } from "../../api/createTask";
+import { getTasks } from "../../api/getTasks";
 
 interface SubmitData {
   title: string;
@@ -27,9 +32,11 @@ const STATUSES: TaskStatus[] = TASK_STATUSES.map((status) => status.value);
 export function CreateTaskModal({
   isActive,
   setIsActive,
+  setTasks,
 }: {
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
 }) {
   const [data, setData] = useState<SubmitData>(INITIAL_DATA);
 
@@ -49,9 +56,11 @@ export function CreateTaskModal({
       deadline: localToUtc(data.deadline),
     };
     // isValid()
+    await createTask(dataToSend);
+    const updatedList = await getTasks();
+    setTasks(updatedList);
     setIsActive(false);
     setData(INITIAL_DATA);
-    await createTask(dataToSend);
   };
 
   return (

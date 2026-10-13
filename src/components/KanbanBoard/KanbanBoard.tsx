@@ -1,21 +1,8 @@
-import { useEffect, useState } from "react";
 import { TASK_STATUSES, type TaskListResponse } from "../../api/model";
 import styles from "./KanbanBoard.module.scss";
-import { getTasks } from "../../api/getTasks";
 import { TaskCard } from "../TaskCard/TaskCard";
 
-export function KanbanBoard() {
-  const [tasks, setTasks] = useState<TaskListResponse | null>(null);
-
-  useEffect(() => {
-    const load = async () => {
-      const data = await getTasks();
-      setTasks(data);
-    };
-
-    load();
-  }, []);
-
+export function KanbanBoard({ tasks }: { tasks: TaskListResponse | null }) {
   return (
     <div className={styles.wrapper}>
       {TASK_STATUSES.map((statusData) => {
