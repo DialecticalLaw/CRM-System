@@ -12,6 +12,7 @@ import { localToUtc } from "../../helpers/date";
 import { Button } from "../ui/Button/Button";
 import { createTask } from "../../api/createTask";
 import { getTasks } from "../../api/getTasks";
+import { ValidationError } from "../ui/ValidationError/ValidationError";
 
 interface SubmitData {
   title: string;
@@ -27,6 +28,11 @@ const INITIAL_DATA: SubmitData = {
   status: "backlog",
 };
 
+type ErrorText =
+  | "Поле обязательно для заполнения"
+  | "Длина должна быть в пределах 4-64 символов"
+  | null;
+
 const STATUSES: TaskStatus[] = TASK_STATUSES.map((status) => status.value);
 
 export function CreateTaskModal({
@@ -39,6 +45,20 @@ export function CreateTaskModal({
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
 }) {
   const [data, setData] = useState<SubmitData>(INITIAL_DATA);
+  const [currentErrorText, setCurrentErrorText] = useState<ErrorText>(null);
+
+  const validate = () => {
+    if (!data.title) {
+      setCurrentErrorText("Поле обязательно для заполнения");
+      return false;
+    } else if (data.title.length < 4 || data.title.length > 64) {
+      setCurrentErrorText("Длина должна быть в пределах 4-64 символов");
+      return false;
+    } else {
+      setCurrentErrorText(null);
+      return true;
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -55,7 +75,10 @@ export function CreateTaskModal({
       executorId: 1,
       deadline: localToUtc(data.deadline),
     };
-    // isValid()
+
+    const isValid = validate();
+    if (!isValid) return;
+
     await createTask(dataToSend);
     const updatedList = await getTasks();
     setTasks(updatedList);
@@ -81,14 +104,17 @@ export function CreateTaskModal({
         </button>
         <h2 className={styles.title}>Новая задача</h2>
 
-        <Textarea
-          name="title"
-          rows={1}
-          label="Название"
-          required={true}
-          onChange={handleChange}
-          value={data.title}
-        />
+        <ValidationError text={currentErrorText || ""}>
+          <Textarea
+            name="title"
+            rows={1}
+            label="Название"
+            required={true}
+            onChange={handleChange}
+            value={data.title}
+          />
+        </ValidationError>
+
         <Textarea
           name="description"
           rows={5}
@@ -111,6 +137,7 @@ export function CreateTaskModal({
           onChange={handleChange}
           value={data.deadline || ""}
         />
+
         <div className={styles.buttonsWrapper}>
           <Button
             classNames={[styles.cancelBtn]}
