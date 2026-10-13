@@ -38,3 +38,11 @@ export interface TaskListResponse {
     statusCounts: TaskStatusCounts;
   };
 }
+
+export interface TaskRequest {
+  title: string;
+  description: string;
+  executorId: number;
+  status: TaskStatus;
+  deadline: string | null;
+}

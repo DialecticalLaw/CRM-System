@@ -1,5 +1,4 @@
 import type { Task } from "../../api/model";
-import { extractDescription } from "../../helpers/extractDescription";
 import { Button } from "../ui/Button/Button";
 import styles from "./TaskCard.module.scss";
 
@@ -8,9 +7,7 @@ export function TaskCard({ data }: { data: Task }) {
     <div className={styles.card}>
       <p className={styles.id}>CRM-{data.id}</p>
       <p className={styles.title}>{data.title}</p>
-      <p className={styles.desc}>
-        {extractDescription(data.description) || "Без описания"}
-      </p>
+      <p className={styles.desc}>{data.description || "Без описания"}</p>
 
       <div className={styles.buttonsWrapper}>
         <Button classNames={[styles.openBtn]} onClick={() => {}}>

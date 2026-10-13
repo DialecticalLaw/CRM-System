@@ -5,13 +5,16 @@ export function Button({
   children,
   onClick,
   classNames,
+  type,
 }: {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   classNames?: string[];
+  type?: "submit" | "button" | "reset";
 }) {
   return (
     <button
+      type={type}
       className={`${styles.btn} ${classNames?.join(" ")}`}
       onClick={onClick}
     >
