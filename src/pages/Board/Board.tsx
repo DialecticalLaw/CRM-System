@@ -5,10 +5,12 @@ import { Button } from "../../components/ui/Button/Button";
 import styles from "./Board.module.scss";
 import type { TaskListResponse } from "../../api/model";
 import { getTasks } from "../../api/getTasks";
+import { DeleteTaskModal } from "../../components/DeleteTaskModal/DeleteTaskModal";
 
 export function Board() {
   const [isActive, setIsActive] = useState(false);
   const [tasks, setTasks] = useState<TaskListResponse | null>(null);
+  const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -27,11 +29,16 @@ export function Board() {
       </div>
 
       <div className={styles.hr} />
-      <KanbanBoard tasks={tasks} />
+      <KanbanBoard setTaskToDelete={setTaskToDelete} tasks={tasks} />
       <CreateTaskModal
         setTasks={setTasks}
         isActive={isActive}
         setIsActive={setIsActive}
+      />
+      <DeleteTaskModal
+        setTasks={setTasks}
+        setTaskToDelete={setTaskToDelete}
+        taskToDelete={taskToDelete}
       />
     </div>
   );

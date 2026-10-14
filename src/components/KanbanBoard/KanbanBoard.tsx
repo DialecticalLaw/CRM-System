@@ -2,7 +2,13 @@ import { TASK_STATUSES, type TaskListResponse } from "../../api/model";
 import styles from "./KanbanBoard.module.scss";
 import { TaskCard } from "../TaskCard/TaskCard";
 
-export function KanbanBoard({ tasks }: { tasks: TaskListResponse | null }) {
+export function KanbanBoard({
+  tasks,
+  setTaskToDelete,
+}: {
+  tasks: TaskListResponse | null;
+  setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+}) {
   return (
     <div className={styles.wrapper}>
       {TASK_STATUSES.map((statusData) => {
@@ -17,7 +23,13 @@ export function KanbanBoard({ tasks }: { tasks: TaskListResponse | null }) {
               &#41;
             </p>
             {filteredTasks?.map((task) => {
-              return <TaskCard key={task.id} data={task} />;
+              return (
+                <TaskCard
+                  setTaskToDelete={setTaskToDelete}
+                  key={task.id}
+                  data={task}
+                />
+              );
             })}
           </div>
         );
