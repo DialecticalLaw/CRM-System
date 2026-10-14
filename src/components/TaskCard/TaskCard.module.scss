@@ -19,6 +19,10 @@
       }
     }
   }
+
+  &.dragging {
+    opacity: 0.4;
+  }
 }
 
 .id,

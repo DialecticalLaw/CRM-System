@@ -29,7 +29,11 @@ export function Board() {
       </div>
 
       <div className={styles.hr} />
-      <KanbanBoard setTaskToDelete={setTaskToDelete} tasks={tasks} />
+      <KanbanBoard
+        setTasks={setTasks}
+        setTaskToDelete={setTaskToDelete}
+        tasks={tasks}
+      />
       <CreateTaskModal
         setTasks={setTasks}
         isActive={isActive}
