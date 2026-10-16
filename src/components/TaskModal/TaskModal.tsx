@@ -5,7 +5,7 @@ import {
   type TaskStatus,
 } from "../../api/model";
 import { Textarea } from "../ui/inputs/Textarea/Textarea";
-import styles from "./CreateTaskModal.module.scss";
+import styles from "./TaskModal.module.scss";
 import { Select } from "../ui/inputs/Select/Select";
 import { DateSelect } from "../ui/inputs/DateSelect/DateSelect";
 import { localToUtc } from "../../helpers/date";
@@ -35,13 +35,13 @@ type ErrorText =
 
 const STATUSES: TaskStatus[] = TASK_STATUSES.map((status) => status.value);
 
-export function CreateTaskModal({
-  isActive,
-  setIsActive,
+export function TaskModal({
+  isTaskModalActive,
+  setTaskModalActive,
   setTasks,
 }: {
-  isActive: boolean;
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isTaskModalActive: boolean;
+  setTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
 }) {
   const [data, setData] = useState<SubmitData>(INITIAL_DATA);
@@ -82,7 +82,7 @@ export function CreateTaskModal({
     await createTask(dataToSend);
     const updatedList = await getTasks();
     setTasks(updatedList);
-    setIsActive(false);
+    setTaskModalActive(false);
     setData(INITIAL_DATA);
   };
 
@@ -92,14 +92,17 @@ export function CreateTaskModal({
       onSubmit={handleSubmit}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          setIsActive(false);
+          setTaskModalActive(false);
           setData(INITIAL_DATA);
         }
       }}
-      className={`${styles.blackout} ${isActive ? styles.active : ""}`}
+      className={`${styles.blackout} ${isTaskModalActive ? styles.active : ""}`}
     >
       <div className={styles.modal}>
-        <button className={styles.closeBtn} onClick={() => setIsActive(false)}>
+        <button
+          className={styles.closeBtn}
+          onClick={() => setTaskModalActive(false)}
+        >
           <img className={styles.closeIcon} src="/close.svg" alt="close" />
         </button>
         <h2 className={styles.title}>Новая задача</h2>
@@ -143,7 +146,7 @@ export function CreateTaskModal({
             classNames={[styles.cancelBtn]}
             type="reset"
             onClick={() => {
-              setIsActive(false);
+              setTaskModalActive(false);
               setData(INITIAL_DATA);
             }}
           >

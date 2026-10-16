@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CreateTaskModal } from "../../components/CreateTaskModal/CreateTaskModal";
+import { TaskModal } from "../../components/TaskModal/TaskModal";
 import { KanbanBoard } from "../../components/KanbanBoard/KanbanBoard";
 import { Button } from "../../components/ui/Button/Button";
 import styles from "./Board.module.scss";
@@ -9,7 +9,7 @@ import { DeleteTaskModal } from "../../components/DeleteTaskModal/DeleteTaskModa
 import { TaskDetails } from "../../components/TaskDetails/TaskDetails";
 
 export function Board() {
-  const [isActive, setIsActive] = useState(false);
+  const [isTaskModalActive, setTaskModalActive] = useState(false);
   const [tasks, setTasks] = useState<TaskListResponse | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
   const [taskDetails, setTaskDetails] = useState<Task | null>(null);
@@ -27,7 +27,7 @@ export function Board() {
     <div className={styles.wrapper}>
       <div className={styles.topWrapper}>
         <h2 className={styles.title}>Доска CRM</h2>
-        <Button onClick={() => setIsActive(true)}>+ Создать</Button>
+        <Button onClick={() => setTaskModalActive(true)}>+ Создать</Button>
       </div>
 
       <div className={styles.hr} />
@@ -45,10 +45,10 @@ export function Board() {
         />
       </div>
 
-      <CreateTaskModal
+      <TaskModal
         setTasks={setTasks}
-        isActive={isActive}
-        setIsActive={setIsActive}
+        isTaskModalActive={isTaskModalActive}
+        setTaskModalActive={setTaskModalActive}
       />
       <DeleteTaskModal
         setTasks={setTasks}
