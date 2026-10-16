@@ -73,3 +73,26 @@
 .info {
   text-align: left;
 }
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.deleteBtn {
+  background-color: var(--color-danger);
+  color: #ffffff;
+
+  &:hover {
+    color: #ffffff;
+    background-color: var(--color-danger);
+    opacity: 0.8;
+  }
+  &:active {
+    color: #ffffff;
+    background-color: var(--color-danger);
+    opacity: 0.6;
+  }
+}

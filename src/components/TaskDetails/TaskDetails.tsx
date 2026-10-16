@@ -1,5 +1,6 @@
 import { TASK_STATUSES, type Task } from "../../api/model";
 import { utcToLocal } from "../../helpers/date";
+import { Button } from "../ui/Button/Button";
 import styles from "./TaskDetails.module.scss";
 
 export function TaskDetails({
@@ -60,6 +61,13 @@ export function TaskDetails({
           ) : (
             <p className={styles.minorText}>Описание не добавлено</p>
           )}
+
+          <div className={styles.buttonsWrapper}>
+            <Button onClick={() => {}}>Редактировать</Button>
+            <Button classNames={[styles.deleteBtn]} onClick={() => {}}>
+              Удалить
+            </Button>
+          </div>
         </>
       )}
     </div>
