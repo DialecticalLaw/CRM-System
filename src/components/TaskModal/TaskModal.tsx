@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   TASK_STATUSES,
+  type Task,
   type TaskListResponse,
   type TaskStatus,
 } from "../../api/model";
@@ -13,15 +14,16 @@ import { Button } from "../ui/Button/Button";
 import { createTask } from "../../api/createTask";
 import { getTasks } from "../../api/getTasks";
 import { ValidationError } from "../ui/ValidationError/ValidationError";
+import { editTask } from "../../api/editTask";
 
-interface SubmitData {
+export interface SubmitData {
   title: string;
   description: string;
   deadline: string | null;
   status: TaskStatus;
 }
 
-const INITIAL_DATA: SubmitData = {
+const DEFAULT_DATA: SubmitData = {
   title: "",
   description: "",
   deadline: null,
@@ -39,12 +41,26 @@ export function TaskModal({
   isTaskModalActive,
   setTaskModalActive,
   setTasks,
+  taskData,
+  setTaskDetails,
+  setTaskToEdit,
 }: {
   isTaskModalActive: boolean;
   setTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
+  taskData: (SubmitData & { id: number }) | null;
+  setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
+  setTaskToEdit: React.Dispatch<
+    React.SetStateAction<
+      | (SubmitData & {
+          id: number;
+        })
+      | null
+    >
+  >;
 }) {
-  const [data, setData] = useState<SubmitData>(INITIAL_DATA);
+  const [data, setData] = useState<SubmitData>(taskData || DEFAULT_DATA);
+  console.log(data);
   const [currentErrorText, setCurrentErrorText] = useState<ErrorText>(null);
 
   const validate = () => {
@@ -79,11 +95,22 @@ export function TaskModal({
     const isValid = validate();
     if (!isValid) return;
 
-    await createTask(dataToSend);
+    if (taskData) {
+      await editTask(dataToSend, taskData.id);
+      setTaskDetails(null);
+      setTaskToEdit(null);
+    } else await createTask(dataToSend);
+
     const updatedList = await getTasks();
     setTasks(updatedList);
     setTaskModalActive(false);
-    setData(INITIAL_DATA);
+    setData(DEFAULT_DATA);
+  };
+
+  const handleCancel = () => {
+    setTaskModalActive(false);
+    setTaskToEdit(null);
+    setData(DEFAULT_DATA);
   };
 
   return (
@@ -91,17 +118,15 @@ export function TaskModal({
       noValidate
       onSubmit={handleSubmit}
       onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          setTaskModalActive(false);
-          setData(INITIAL_DATA);
-        }
+        if (e.target === e.currentTarget) handleCancel();
       }}
       className={`${styles.blackout} ${isTaskModalActive ? styles.active : ""}`}
     >
       <div className={styles.modal}>
         <button
+          type="button"
           className={styles.closeBtn}
-          onClick={() => setTaskModalActive(false)}
+          onClick={() => handleCancel()}
         >
           <img className={styles.closeIcon} src="/close.svg" alt="close" />
         </button>
@@ -145,10 +170,7 @@ export function TaskModal({
           <Button
             classNames={[styles.cancelBtn]}
             type="reset"
-            onClick={() => {
-              setTaskModalActive(false);
-              setData(INITIAL_DATA);
-            }}
+            onClick={() => handleCancel()}
           >
             Отмена
           </Button>

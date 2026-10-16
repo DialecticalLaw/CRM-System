@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { TaskModal } from "../../components/TaskModal/TaskModal";
+import {
+  TaskModal,
+  type SubmitData,
+} from "../../components/TaskModal/TaskModal";
 import { KanbanBoard } from "../../components/KanbanBoard/KanbanBoard";
 import { Button } from "../../components/ui/Button/Button";
 import styles from "./Board.module.scss";
@@ -12,6 +15,9 @@ export function Board() {
   const [isTaskModalActive, setTaskModalActive] = useState(false);
   const [tasks, setTasks] = useState<TaskListResponse | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
+  const [taskToEdit, setTaskToEdit] = useState<
+    (SubmitData & { id: number }) | null
+  >(null);
   const [taskDetails, setTaskDetails] = useState<Task | null>(null);
 
   useEffect(() => {
@@ -39,6 +45,8 @@ export function Board() {
           tasks={tasks}
         />
         <TaskDetails
+          setTaskModalActive={setTaskModalActive}
+          setTaskToEdit={setTaskToEdit}
           details={taskDetails}
           setTaskDetails={setTaskDetails}
           setTaskToDelete={setTaskToDelete}
@@ -46,7 +54,11 @@ export function Board() {
       </div>
 
       <TaskModal
+        key={taskToEdit ? `edit-${taskToEdit.id}` : "create"}
+        taskData={taskToEdit}
+        setTaskToEdit={setTaskToEdit}
         setTasks={setTasks}
+        setTaskDetails={setTaskDetails}
         isTaskModalActive={isTaskModalActive}
         setTaskModalActive={setTaskModalActive}
       />

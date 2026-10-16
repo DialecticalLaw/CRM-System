@@ -1,5 +1,6 @@
 import { TASK_STATUSES, type Task } from "../../api/model";
-import { utcToLocal } from "../../helpers/date";
+import { utcToInputValue, utcToLocal } from "../../helpers/date";
+import type { SubmitData } from "../TaskModal/TaskModal";
 import { Button } from "../ui/Button/Button";
 import styles from "./TaskDetails.module.scss";
 
@@ -7,10 +8,21 @@ export function TaskDetails({
   details,
   setTaskDetails,
   setTaskToDelete,
+  setTaskModalActive,
+  setTaskToEdit,
 }: {
   details: Task | null;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
   setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+  setTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setTaskToEdit: React.Dispatch<
+    React.SetStateAction<
+      | (SubmitData & {
+          id: number;
+        })
+      | null
+    >
+  >;
 }) {
   return (
     <div className={`${styles.wrapper} ${details ? styles.active : ""}`}>
@@ -65,7 +77,20 @@ export function TaskDetails({
           )}
 
           <div className={styles.buttonsWrapper}>
-            <Button onClick={() => {}}>Редактировать</Button>
+            <Button
+              onClick={() => {
+                setTaskToEdit({
+                  title: details.title,
+                  description: details.description,
+                  deadline: utcToInputValue(details.deadline) || null,
+                  status: details.status,
+                  id: details.id,
+                });
+                setTaskModalActive(true);
+              }}
+            >
+              Редактировать
+            </Button>
             <Button
               classNames={[styles.deleteBtn]}
               onClick={() => setTaskToDelete(details.id)}

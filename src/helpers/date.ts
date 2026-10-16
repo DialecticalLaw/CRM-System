@@ -11,3 +11,13 @@ export function utcToLocal(value: string | undefined): string {
       })
     : "";
 }
+
+export function utcToInputValue(value: string | undefined): string {
+  if (!value) return "";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+
+  const shifted = new Date(date.getTime() - date.getTimezoneOffset() * 60_000);
+  return shifted.toISOString().slice(0, 16); // "yyyy-mm-ddThh:mm"
+}
