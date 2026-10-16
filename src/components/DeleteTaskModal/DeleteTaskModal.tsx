@@ -2,16 +2,18 @@ import { Button } from "../ui/Button/Button";
 import styles from "./DeleteTaskModal.module.scss";
 import { deleteTask } from "../../api/deleteTask";
 import { getTasks } from "../../api/getTasks";
-import type { TaskListResponse } from "../../api/model";
+import type { Task, TaskListResponse } from "../../api/model";
 
 export function DeleteTaskModal({
   taskToDelete,
   setTaskToDelete,
   setTasks,
+  setTaskDetails,
 }: {
   taskToDelete: number | null;
   setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
+  setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
 }) {
   const handleDelete = async () => {
     if (taskToDelete) await deleteTask(taskToDelete);
@@ -46,6 +48,7 @@ export function DeleteTaskModal({
               const updatedList = await getTasks();
               setTasks(updatedList);
               setTaskToDelete(null);
+              setTaskDetails(null);
             }}
             classNames={[styles.deleteBtn]}
           >

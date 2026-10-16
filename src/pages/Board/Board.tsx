@@ -38,7 +38,11 @@ export function Board() {
           setTaskToDelete={setTaskToDelete}
           tasks={tasks}
         />
-        <TaskDetails details={taskDetails} setTaskDetails={setTaskDetails} />
+        <TaskDetails
+          details={taskDetails}
+          setTaskDetails={setTaskDetails}
+          setTaskToDelete={setTaskToDelete}
+        />
       </div>
 
       <CreateTaskModal
@@ -49,6 +53,7 @@ export function Board() {
       <DeleteTaskModal
         setTasks={setTasks}
         setTaskToDelete={setTaskToDelete}
+        setTaskDetails={setTaskDetails}
         taskToDelete={taskToDelete}
       />
     </div>

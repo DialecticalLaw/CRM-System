@@ -6,9 +6,11 @@ import styles from "./TaskDetails.module.scss";
 export function TaskDetails({
   details,
   setTaskDetails,
+  setTaskToDelete,
 }: {
   details: Task | null;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
+  setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
   return (
     <div className={`${styles.wrapper} ${details ? styles.active : ""}`}>
@@ -64,7 +66,10 @@ export function TaskDetails({
 
           <div className={styles.buttonsWrapper}>
             <Button onClick={() => {}}>Редактировать</Button>
-            <Button classNames={[styles.deleteBtn]} onClick={() => {}}>
+            <Button
+              classNames={[styles.deleteBtn]}
+              onClick={() => setTaskToDelete(details.id)}
+            >
               Удалить
             </Button>
           </div>
