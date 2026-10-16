@@ -3,14 +3,16 @@ import { CreateTaskModal } from "../../components/CreateTaskModal/CreateTaskModa
 import { KanbanBoard } from "../../components/KanbanBoard/KanbanBoard";
 import { Button } from "../../components/ui/Button/Button";
 import styles from "./Board.module.scss";
-import type { TaskListResponse } from "../../api/model";
+import type { Task, TaskListResponse } from "../../api/model";
 import { getTasks } from "../../api/getTasks";
 import { DeleteTaskModal } from "../../components/DeleteTaskModal/DeleteTaskModal";
+import { TaskDetails } from "../../components/TaskDetails/TaskDetails";
 
 export function Board() {
   const [isActive, setIsActive] = useState(false);
   const [tasks, setTasks] = useState<TaskListResponse | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
+  const [taskDetails, setTaskDetails] = useState<Task | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -29,11 +31,16 @@ export function Board() {
       </div>
 
       <div className={styles.hr} />
-      <KanbanBoard
-        setTasks={setTasks}
-        setTaskToDelete={setTaskToDelete}
-        tasks={tasks}
-      />
+      <div className={styles.kanbanWrapper}>
+        <KanbanBoard
+          setTaskDetails={setTaskDetails}
+          setTasks={setTasks}
+          setTaskToDelete={setTaskToDelete}
+          tasks={tasks}
+        />
+        <TaskDetails details={taskDetails} setTaskDetails={setTaskDetails} />
+      </div>
+
       <CreateTaskModal
         setTasks={setTasks}
         isActive={isActive}

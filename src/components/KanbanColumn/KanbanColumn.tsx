@@ -9,12 +9,14 @@ import { editTask } from "../../api/editTask";
 export function KanbanColumn({
   statusData,
   setTaskToDelete,
+  setTaskDetails,
   setTasks,
   tasks,
   filteredTasks,
 }: {
   statusData: { label: string; value: TaskStatus };
   setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+  setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
   tasks: TaskListResponse | null;
   filteredTasks?: Task[];
@@ -67,6 +69,7 @@ export function KanbanColumn({
       {filteredTasks?.map((task) => {
         return (
           <TaskCard
+            setTaskDetails={setTaskDetails}
             setTaskToDelete={setTaskToDelete}
             key={task.id}
             data={task}

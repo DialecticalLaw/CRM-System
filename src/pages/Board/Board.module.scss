@@ -18,3 +18,11 @@
   height: 0.1rem;
   background-color: var(--color-bg-tertiary);
 }
+
+.kanbanWrapper {
+  display: flex;
+  gap: 1rem;
+  max-width: 80dvw;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}

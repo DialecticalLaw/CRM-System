@@ -6,9 +6,11 @@ import styles from "./TaskCard.module.scss";
 export function TaskCard({
   data,
   setTaskToDelete,
+  setTaskDetails,
 }: {
   data: Task;
   setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+  setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
 }) {
   const [isDragging, setIsDragging] = useState(false);
 
@@ -29,7 +31,10 @@ export function TaskCard({
       <p className={styles.desc}>{data.description || "Без описания"}</p>
 
       <div className={styles.buttonsWrapper}>
-        <Button classNames={[styles.openBtn]} onClick={() => {}}>
+        <Button
+          classNames={[styles.openBtn]}
+          onClick={() => setTaskDetails(data)}
+        >
           Открыть
         </Button>
         <Button
