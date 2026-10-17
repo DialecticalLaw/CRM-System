@@ -60,7 +60,6 @@ export function TaskModal({
   >;
 }) {
   const [data, setData] = useState<SubmitData>(taskData || DEFAULT_DATA);
-  console.log(data);
   const [currentErrorText, setCurrentErrorText] = useState<ErrorText>(null);
 
   const validate = () => {
