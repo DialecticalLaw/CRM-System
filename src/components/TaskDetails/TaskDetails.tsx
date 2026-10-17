@@ -1,0 +1,108 @@
+import { TASK_STATUSES, type Task } from "../../api/model";
+import { utcToInputValue, utcToLocal } from "../../helpers/date";
+import type { SubmitData } from "../TaskModal/TaskModal";
+import { Button } from "../ui/Button/Button";
+import styles from "./TaskDetails.module.scss";
+import { TaskHistory } from "../TaskHistory/TaskHistory";
+
+export function TaskDetails({
+  details,
+  setTaskDetails,
+  setTaskToDelete,
+  setTaskModalActive,
+  setTaskToEdit,
+}: {
+  details: Task | null;
+  setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
+  setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+  setTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setTaskToEdit: React.Dispatch<
+    React.SetStateAction<
+      | (SubmitData & {
+          id: number;
+        })
+      | null
+    >
+  >;
+}) {
+  return (
+    <div className={`${styles.wrapper} ${details ? styles.active : ""}`}>
+      {details && (
+        <>
+          <button
+            className={styles.closeBtn}
+            onClick={() => setTaskDetails(null)}
+          >
+            <img className={styles.closeIcon} src="/close.svg" alt="close" />
+          </button>
+          <p className={styles.minorText}>CRM-{details.id}</p>
+          <h2 className={styles.title}>{details.title}</h2>
+
+          <div className={styles.hr} />
+
+          <div className={styles.infoWrapper}>
+            <div className={styles.infoItem}>
+              <p className={styles.label}>Статус</p>
+              <p className={styles.info}>
+                {TASK_STATUSES.find((s) => s.value === details.status)?.label ||
+                  "Нет информации"}
+              </p>
+            </div>
+            <div className={styles.infoItem}>
+              <p className={styles.label}>Дедлайн</p>
+              <p className={styles.info}>
+                {utcToLocal(details.deadline) || "Не задан"}
+              </p>
+            </div>
+            <div className={styles.infoItem}>
+              <p className={styles.label}>Создана</p>
+              <p className={styles.info}>
+                {utcToLocal(details.createdAt) || "Нет информации"}
+              </p>
+            </div>
+            <div className={styles.infoItem}>
+              <p className={styles.label}>Обновлена</p>
+              <p className={styles.info}>
+                {utcToLocal(details.updatedAt) || "Нет информации"}
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.hr} />
+
+          <h2 className={styles.title}>Описание</h2>
+          {details.description ? (
+            <p className={styles.description}>{details.description}</p>
+          ) : (
+            <p className={styles.minorText}>Описание не добавлено</p>
+          )}
+
+          <TaskHistory details={details} />
+
+          <div className={styles.buttonsWrapper}>
+            <Button
+              onClick={() => {
+                setTaskToEdit({
+                  title: details.title,
+                  description: details.description,
+                  deadline: utcToInputValue(details.deadline) || null,
+                  status: details.status,
+                  id: details.id,
+                });
+                setTaskModalActive(true);
+              }}
+            >
+              Редактировать
+            </Button>
+            <Button
+              classNames={[styles.deleteBtn]}
+              onClick={() => setTaskToDelete(details.id)}
+            >
+              Удалить
+            </Button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
