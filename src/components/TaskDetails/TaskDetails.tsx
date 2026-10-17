@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
-import {
-  TASK_STATUSES,
-  type Task,
-  type TaskHistoryResponse,
-} from "../../api/model";
+import { TASK_STATUSES, type Task } from "../../api/model";
 import { utcToInputValue, utcToLocal } from "../../helpers/date";
 import type { SubmitData } from "../TaskModal/TaskModal";
 import { Button } from "../ui/Button/Button";
 import styles from "./TaskDetails.module.scss";
-import { getHistory } from "../../api/getHistory";
-import { formatDuration } from "../../helpers/formatDuration";
+import { TaskHistory } from "../TaskHistory/TaskHistory";
 
 export function TaskDetails({
   details,
@@ -31,39 +25,6 @@ export function TaskDetails({
     >
   >;
 }) {
-  const [history, setHistory] = useState<TaskHistoryResponse | null>(null);
-
-  useEffect(() => {
-    if (!details) return;
-    const loadHistory = async () => {
-      const history = await getHistory(details.id);
-      if (!history) return;
-      setHistory(history);
-    };
-    loadHistory();
-  }, [details]);
-
-  console.log(history);
-
-  if (!history) return null;
-
-  const totalDuration = history.statusDurations.reduce(
-    (acc, s) => acc + s.durationSeconds,
-    0,
-  );
-
-  const statusesStats = history.statusDurations.map((s, i) => {
-    return {
-      key: i,
-      status: s.status,
-      duration: formatDuration(s.durationSeconds),
-      percent: (s.durationSeconds / totalDuration) * 100,
-      color:
-        TASK_STATUSES.find((st) => st.value === s.status)?.color ||
-        "transparent",
-    };
-  });
-
   return (
     <div className={`${styles.wrapper} ${details ? styles.active : ""}`}>
       {details && (
@@ -116,44 +77,7 @@ export function TaskDetails({
             <p className={styles.minorText}>Описание не добавлено</p>
           )}
 
-          <div className={styles.history}>
-            <h2>Время по статусам</h2>
-            <div className={styles.historyBar}>
-              {statusesStats.map((data) => {
-                console.log(data.percent);
-                return (
-                  <div
-                    key={data.key}
-                    className={styles.statusDuration}
-                    title={`${
-                      TASK_STATUSES.find((s) => s.value === data.status)
-                        ?.label || "Неизвестно"
-                    } - ${data.duration}`}
-                    style={{
-                      width: `${data.percent < 1 ? 1 : data.percent}%`,
-                      backgroundColor: data.color,
-                    }}
-                  />
-                );
-              })}
-            </div>
-
-            <div className={styles.historyDetails}>
-              {statusesStats.map((data) => {
-                return (
-                  <p key={data.key} className={styles.historyDetail}>
-                    <span
-                      className={styles.historyDetailMarker}
-                      style={{ backgroundColor: data.color }}
-                    ></span>
-                    {TASK_STATUSES.find((s) => s.value === data.status)
-                      ?.label || "Неизвестно"}
-                    &nbsp;&middot;&nbsp;{data.duration}
-                  </p>
-                );
-              })}
-            </div>
-          </div>
+          <TaskHistory details={details} />
 
           <div className={styles.buttonsWrapper}>
             <Button
