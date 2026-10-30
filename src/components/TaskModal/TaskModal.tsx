@@ -17,6 +17,9 @@ import { editTask } from "../../api/editTask";
 import { TASK_STATUSES } from "../../api/constants";
 import type { SubmitData } from "../../types";
 
+const minTitleLength = 4;
+const maxTitleLength = 64;
+
 const DEFAULT_DATA: SubmitData = {
   title: "",
   description: "",
@@ -60,7 +63,10 @@ export function TaskModal({
     if (!data.title) {
       setCurrentErrorText("Поле обязательно для заполнения");
       return false;
-    } else if (data.title.length < 4 || data.title.length > 64) {
+    } else if (
+      data.title.length < minTitleLength ||
+      data.title.length > maxTitleLength
+    ) {
       setCurrentErrorText("Длина должна быть в пределах 4-64 символов");
       return false;
     } else {
