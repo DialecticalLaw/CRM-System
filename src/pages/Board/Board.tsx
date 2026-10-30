@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  TaskModal,
-  type SubmitData,
-} from "../../components/TaskModal/TaskModal";
+import { TaskModal } from "../../components/TaskModal/TaskModal";
 import { KanbanBoard } from "../../components/KanbanBoard/KanbanBoard";
 import { Button } from "../../components/ui/Button/Button";
 import styles from "./Board.module.scss";
@@ -10,6 +7,7 @@ import type { Task, TaskListResponse } from "../../api/apiTypes";
 import { getTasks } from "../../api/getTasks";
 import { DeleteTaskModal } from "../../components/DeleteTaskModal/DeleteTaskModal";
 import { TaskDetails } from "../../components/TaskDetails/TaskDetails";
+import type { SubmitData } from "../../types";
 
 export function Board() {
   const [isTaskModalActive, setIsTaskModalActive] = useState<boolean>(false);

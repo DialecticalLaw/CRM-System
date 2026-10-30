@@ -15,13 +15,7 @@ import { getTasks } from "../../api/getTasks";
 import { ValidationError } from "../ui/ValidationError/ValidationError";
 import { editTask } from "../../api/editTask";
 import { TASK_STATUSES } from "../../api/constants";
-
-export interface SubmitData {
-  title: string;
-  description: string;
-  deadline: string | null;
-  status: TaskStatus;
-}
+import type { SubmitData } from "../../types";
 
 const DEFAULT_DATA: SubmitData = {
   title: "",

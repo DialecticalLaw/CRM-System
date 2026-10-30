@@ -1,10 +1,10 @@
 import { type Task } from "../../api/apiTypes";
 import { utcToInputValue, utcToLocal } from "../../helpers/date";
-import type { SubmitData } from "../TaskModal/TaskModal";
 import { Button } from "../ui/Button/Button";
 import styles from "./TaskDetails.module.scss";
 import { TaskHistory } from "../TaskHistory/TaskHistory";
 import { TASK_STATUSES } from "../../api/constants";
+import type { SubmitData } from "../../types";
 
 export function TaskDetails({
   details,
