@@ -5,39 +5,40 @@ import { getTasks } from "../../api/getTasks";
 import type { Task, TaskListResponse } from "../../api/apiTypes";
 
 export function DeleteTaskModal({
-  taskToDelete,
-  setTaskToDelete,
+  taskIdToDelete,
+  setTaskIdToDelete,
   setTasks,
   setTaskDetails,
 }: {
-  taskToDelete: number | null;
-  setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+  taskIdToDelete: number | null;
+  setTaskIdToDelete: React.Dispatch<React.SetStateAction<number | null>>;
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
 }) {
   const handleDelete = async () => {
-    if (taskToDelete) await deleteTask(taskToDelete);
+    if (taskIdToDelete) await deleteTask(taskIdToDelete);
   };
 
   return (
     <div
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          setTaskToDelete(null);
+          setTaskIdToDelete(null);
         }
       }}
-      className={`${styles.blackout} ${taskToDelete ? styles.active : ""}`}
+      className={`${styles.blackout} ${taskIdToDelete ? styles.active : ""}`}
     >
       <div className={styles.modal}>
         <h2 className={styles.title}>
-          Удалить задачу <span className={styles.id}>CRM-{taskToDelete}</span>?
+          Удалить задачу <span className={styles.id}>CRM-{taskIdToDelete}</span>
+          ?
         </h2>
         <p>Это действие нельзя отменить</p>
         <div className={styles.buttonsWrapper}>
           <Button
             classNames={[styles.cancelBtn]}
             onClick={() => {
-              setTaskToDelete(null);
+              setTaskIdToDelete(null);
             }}
           >
             Отмена
@@ -47,7 +48,7 @@ export function DeleteTaskModal({
               await handleDelete();
               const updatedList = await getTasks();
               setTasks(updatedList);
-              setTaskToDelete(null);
+              setTaskIdToDelete(null);
               setTaskDetails(null);
             }}
             classNames={[styles.deleteBtn]}

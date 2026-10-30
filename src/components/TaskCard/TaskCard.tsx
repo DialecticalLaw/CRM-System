@@ -5,11 +5,11 @@ import styles from "./TaskCard.module.scss";
 
 export function TaskCard({
   data,
-  setTaskToDelete,
+  setTaskIdToDelete,
   setTaskDetails,
 }: {
   data: Task;
-  setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+  setTaskIdToDelete: React.Dispatch<React.SetStateAction<number | null>>;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
 }) {
   const [isDragging, setIsDragging] = useState(false);
@@ -39,7 +39,7 @@ export function TaskCard({
         </Button>
         <Button
           classNames={[styles.deleteBtn]}
-          onClick={() => setTaskToDelete(data.id)}
+          onClick={() => setTaskIdToDelete(data.id)}
         >
           Удалить
         </Button>

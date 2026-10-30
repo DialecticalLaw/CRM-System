@@ -9,13 +9,13 @@ import { TASK_STATUSES } from "../../api/constants";
 export function TaskDetails({
   details,
   setTaskDetails,
-  setTaskToDelete,
+  setTaskIdToDelete,
   setIsTaskModalActive,
   setTaskToEdit,
 }: {
   details: Task | null;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
-  setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+  setTaskIdToDelete: React.Dispatch<React.SetStateAction<number | null>>;
   setIsTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   setTaskToEdit: React.Dispatch<
     React.SetStateAction<
@@ -97,7 +97,7 @@ export function TaskDetails({
             </Button>
             <Button
               classNames={[styles.deleteBtn]}
-              onClick={() => setTaskToDelete(details.id)}
+              onClick={() => setTaskIdToDelete(details.id)}
             >
               Удалить
             </Button>

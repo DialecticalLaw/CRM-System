@@ -6,12 +6,12 @@ import { TASK_STATUSES } from "../../api/constants";
 export function KanbanBoard({
   tasks,
   setTasks,
-  setTaskToDelete,
+  setTaskIdToDelete,
   setTaskDetails,
 }: {
   tasks: TaskListResponse | null;
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
-  setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
+  setTaskIdToDelete: React.Dispatch<React.SetStateAction<number | null>>;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
 }) {
   return (
@@ -26,7 +26,7 @@ export function KanbanBoard({
             tasks={tasks}
             statusData={statusData}
             setTaskDetails={setTaskDetails}
-            setTaskToDelete={setTaskToDelete}
+            setTaskIdToDelete={setTaskIdToDelete}
             setTasks={setTasks}
             filteredTasks={filteredTasks}
           />

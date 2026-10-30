@@ -14,7 +14,7 @@ import { TaskDetails } from "../../components/TaskDetails/TaskDetails";
 export function Board() {
   const [isTaskModalActive, setIsTaskModalActive] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskListResponse | null>(null);
-  const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
+  const [taskIdToDelete, setTaskIdToDelete] = useState<number | null>(null);
   const [taskToEdit, setTaskToEdit] = useState<
     (SubmitData & { id: number }) | null
   >(null);
@@ -41,7 +41,7 @@ export function Board() {
         <KanbanBoard
           setTaskDetails={setTaskDetails}
           setTasks={setTasks}
-          setTaskToDelete={setTaskToDelete}
+          setTaskIdToDelete={setTaskIdToDelete}
           tasks={tasks}
         />
         <TaskDetails
@@ -49,7 +49,7 @@ export function Board() {
           setTaskToEdit={setTaskToEdit}
           details={taskDetails}
           setTaskDetails={setTaskDetails}
-          setTaskToDelete={setTaskToDelete}
+          setTaskIdToDelete={setTaskIdToDelete}
         />
       </div>
 
@@ -64,9 +64,9 @@ export function Board() {
       />
       <DeleteTaskModal
         setTasks={setTasks}
-        setTaskToDelete={setTaskToDelete}
+        setTaskIdToDelete={setTaskIdToDelete}
         setTaskDetails={setTaskDetails}
-        taskToDelete={taskToDelete}
+        taskIdToDelete={taskIdToDelete}
       />
     </div>
   );
