@@ -1,4 +1,4 @@
-import type { Task } from "../api/apiTypes";
+import type { Task } from "../types";
 
 export function isTask(value: unknown): value is Task {
   return (

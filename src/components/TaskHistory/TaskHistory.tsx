@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { type Task, type TaskHistoryResponse } from "../../api/apiTypes";
 import { formatDuration } from "../../helpers/formatDuration";
 import styles from "./TaskHistory.module.scss";
 import { getHistory } from "../../api/getHistory";
 import { TASK_STATUSES } from "../../api/constants";
+import type { Task, TaskHistoryResponse } from "../../types";
 
 export function TaskHistory({ details }: { details: Task | null }) {
   const [history, setHistory] = useState<TaskHistoryResponse | null>(null);

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { Task } from "../../api/apiTypes";
 import { Button } from "../ui/Button/Button";
 import styles from "./TaskCard.module.scss";
+import type { Task } from "../../types";
 
 export function TaskCard({
   data,

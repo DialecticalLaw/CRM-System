@@ -1,4 +1,4 @@
-import type { TaskHistoryResponse } from "./apiTypes";
+import type { TaskHistoryResponse } from "../types";
 
 export async function getHistory(
   id: number,

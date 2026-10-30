@@ -1,10 +1,10 @@
 import { useState } from "react";
-import type { Task, TaskListResponse, TaskStatus } from "../../api/apiTypes";
 import { TaskCard } from "../TaskCard/TaskCard";
 import styles from "./KanbanColumn.module.scss";
 import { getTasks } from "../../api/getTasks";
 import { isTask } from "../../helpers/isTask";
 import { editTask } from "../../api/editTask";
+import type { Task, TaskListResponse, TaskStatus } from "../../types";
 
 export function KanbanColumn({
   statusData,

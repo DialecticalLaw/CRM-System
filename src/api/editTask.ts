@@ -1,4 +1,4 @@
-import type { TaskRequest } from "./apiTypes";
+import type { TaskRequest } from "../types";
 
 export async function editTask(body: TaskRequest, id: number) {
   try {

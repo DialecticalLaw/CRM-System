@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  type Task,
-  type TaskListResponse,
-  type TaskStatus,
-} from "../../api/apiTypes";
+
 import { Textarea } from "../ui/inputs/Textarea/Textarea";
 import styles from "./TaskModal.module.scss";
 import { Select } from "../ui/inputs/Select/Select";
@@ -15,7 +11,12 @@ import { getTasks } from "../../api/getTasks";
 import { ValidationError } from "../ui/ValidationError/ValidationError";
 import { editTask } from "../../api/editTask";
 import { TASK_STATUSES } from "../../api/constants";
-import type { SubmitData } from "../../types";
+import type {
+  SubmitData,
+  Task,
+  TaskListResponse,
+  TaskStatus,
+} from "../../types";
 
 const minTitleLength = 4;
 const maxTitleLength = 64;
