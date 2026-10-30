@@ -1,6 +1,8 @@
+import { tasksBaseUrl } from "./constants";
+
 export async function deleteTask(id: number) {
   try {
-    await fetch(`https://tech-mindset.ru/api/v1/tasks/${id}`, {
+    await fetch(`${tasksBaseUrl}${id}`, {
       method: "DELETE",
     });
   } catch (error) {

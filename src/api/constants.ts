@@ -7,3 +7,5 @@ export const TASK_STATUSES = [
   { value: "onHold", label: "На паузе", color: "#ecff16" },
   { value: "done", label: "Выполнено", color: "#34ff59" },
 ] as const;
+
+export const tasksBaseUrl = import.meta.env.VITE_API_TASKS_URL;

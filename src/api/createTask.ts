@@ -1,8 +1,9 @@
 import type { TaskRequest } from "../types";
+import { tasksBaseUrl } from "./constants";
 
 export async function createTask(body: TaskRequest) {
   try {
-    await fetch("https://tech-mindset.ru/api/v1/tasks/", {
+    await fetch(tasksBaseUrl, {
       method: "POST",
       body: JSON.stringify(body),
     });

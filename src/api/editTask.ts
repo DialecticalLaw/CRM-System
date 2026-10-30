@@ -1,8 +1,9 @@
 import type { TaskRequest } from "../types";
+import { tasksBaseUrl } from "./constants";
 
 export async function editTask(body: TaskRequest, id: number) {
   try {
-    await fetch(`https://tech-mindset.ru/api/v1/tasks/${id}`, {
+    await fetch(`${tasksBaseUrl}${id}`, {
       method: "PUT",
       body: JSON.stringify(body),
     });
