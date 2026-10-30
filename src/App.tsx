@@ -1,7 +1,15 @@
-import "./App.scss";
+import { Outlet } from "react-router";
+import styles from "./App.module.scss";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 
-function App() {
-  return <div>App</div>;
+export function App() {
+  return (
+    <div className={styles.app}>
+      <Sidebar />
+
+      <main className={styles.main}>
+        <Outlet />
+      </main>
+    </div>
+  );
 }
-
-export default App;

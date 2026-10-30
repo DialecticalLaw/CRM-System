@@ -1,0 +1,11 @@
+.required {
+  color: var(--color-danger);
+}
+
+.textarea {
+  resize: none;
+  width: 100%;
+  padding: 0.5rem;
+  box-shadow: var(--box-shadow);
+  outline-color: var(--color-accent);
+}
