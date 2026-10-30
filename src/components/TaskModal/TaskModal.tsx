@@ -28,11 +28,6 @@ const DEFAULT_DATA: TaskDataForSubmit = {
   status: "backlog",
 };
 
-type ErrorText =
-  | "Поле обязательно для заполнения"
-  | "Длина должна быть в пределах 4-64 символов"
-  | null;
-
 const STATUSES: TaskStatus[] = TASK_STATUSES.map((status) => status.value);
 
 export function TaskModal({
@@ -51,7 +46,7 @@ export function TaskModal({
   setTaskToEdit: React.Dispatch<React.SetStateAction<TaskDataForSubmit | null>>;
 }) {
   const [data, setData] = useState<TaskDataForSubmit>(taskData || DEFAULT_DATA);
-  const [currentErrorText, setCurrentErrorText] = useState<ErrorText>(null);
+  const [currentErrorText, setCurrentErrorText] = useState<string | null>(null);
 
   const validate = () => {
     if (!data.title) {
