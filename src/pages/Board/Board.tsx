@@ -6,15 +6,13 @@ import styles from "./Board.module.scss";
 import { getTasks } from "../../api/getTasks";
 import { DeleteTaskModal } from "../../components/DeleteTaskModal/DeleteTaskModal";
 import { TaskDetails } from "../../components/TaskDetails/TaskDetails";
-import type { SubmitData, Task, TaskListResponse } from "../../types";
+import type { TaskDataForSubmit, Task, TaskListResponse } from "../../types";
 
 export function Board() {
   const [isTaskModalActive, setIsTaskModalActive] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskListResponse | null>(null);
   const [taskIdToDelete, setTaskIdToDelete] = useState<number | null>(null);
-  const [taskToEdit, setTaskToEdit] = useState<
-    (SubmitData & { id: number }) | null
-  >(null);
+  const [taskToEdit, setTaskToEdit] = useState<TaskDataForSubmit | null>(null);
   const [taskDetails, setTaskDetails] = useState<Task | null>(null);
 
   useEffect(() => {

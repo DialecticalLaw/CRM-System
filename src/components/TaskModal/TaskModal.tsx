@@ -12,7 +12,7 @@ import { ValidationError } from "../ui/ValidationError/ValidationError";
 import { editTask } from "../../api/editTask";
 import { TASK_STATUSES } from "../../api/constants";
 import type {
-  SubmitData,
+  TaskDataForSubmit,
   Task,
   TaskListResponse,
   TaskStatus,
@@ -21,7 +21,7 @@ import type {
 const minTitleLength = 4;
 const maxTitleLength = 64;
 
-const DEFAULT_DATA: SubmitData = {
+const DEFAULT_DATA: TaskDataForSubmit = {
   title: "",
   description: "",
   deadline: null,
@@ -46,18 +46,11 @@ export function TaskModal({
   isTaskModalActive: boolean;
   setIsTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
-  taskData: (SubmitData & { id: number }) | null;
+  taskData: TaskDataForSubmit | null;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
-  setTaskToEdit: React.Dispatch<
-    React.SetStateAction<
-      | (SubmitData & {
-          id: number;
-        })
-      | null
-    >
-  >;
+  setTaskToEdit: React.Dispatch<React.SetStateAction<TaskDataForSubmit | null>>;
 }) {
-  const [data, setData] = useState<SubmitData>(taskData || DEFAULT_DATA);
+  const [data, setData] = useState<TaskDataForSubmit>(taskData || DEFAULT_DATA);
   const [currentErrorText, setCurrentErrorText] = useState<ErrorText>(null);
 
   const validate = () => {
@@ -95,7 +88,7 @@ export function TaskModal({
     const isValid = validate();
     if (!isValid) return;
 
-    if (taskData) {
+    if (taskData && taskData.id) {
       await editTask(dataToSend, taskData.id);
       setTaskDetails(null);
       setTaskToEdit(null);

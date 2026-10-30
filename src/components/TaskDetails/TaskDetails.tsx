@@ -3,7 +3,7 @@ import { Button } from "../ui/Button/Button";
 import styles from "./TaskDetails.module.scss";
 import { TaskHistory } from "../TaskHistory/TaskHistory";
 import { TASK_STATUSES } from "../../api/constants";
-import type { SubmitData, Task } from "../../types";
+import type { Task, TaskDataForSubmit } from "../../types";
 
 export function TaskDetails({
   details,
@@ -16,14 +16,7 @@ export function TaskDetails({
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
   setTaskIdToDelete: React.Dispatch<React.SetStateAction<number | null>>;
   setIsTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setTaskToEdit: React.Dispatch<
-    React.SetStateAction<
-      | (SubmitData & {
-          id: number;
-        })
-      | null
-    >
-  >;
+  setTaskToEdit: React.Dispatch<React.SetStateAction<TaskDataForSubmit | null>>;
 }) {
   return (
     <div className={`${styles.wrapper} ${details ? styles.active : ""}`}>

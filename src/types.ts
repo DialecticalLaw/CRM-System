@@ -1,12 +1,5 @@
 import type { TASK_STATUSES } from "./api/constants";
 
-export interface SubmitData {
-  title: string;
-  description: string;
-  deadline: string | null;
-  status: TaskStatus;
-}
-
 export type TaskStatus = (typeof TASK_STATUSES)[number]["value"];
 
 interface EntityDescription {
@@ -26,6 +19,14 @@ export interface Task {
   createdAt: string;
   updatedAt: string;
 }
+
+export type TaskDataForSubmit = Pick<
+  Task,
+  "title" | "description" | "status"
+> & {
+  deadline: string | null;
+  id?: Task["id"];
+};
 
 export interface TaskListResponse {
   data: Task[];
