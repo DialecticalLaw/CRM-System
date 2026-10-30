@@ -1,7 +1,6 @@
 import { utcToInputValue, utcToLocal } from "../../helpers/date";
 import { Button } from "../ui/Button/Button";
 import styles from "./TaskDetails.module.scss";
-import { TaskHistory } from "../TaskHistory/TaskHistory";
 import { TASK_STATUSES } from "../../api/constants";
 import type { Task, TaskDataForSubmit } from "../../types";
 
@@ -69,8 +68,6 @@ export function TaskDetails({
           ) : (
             <p className={styles.minorText}>Описание не добавлено</p>
           )}
-
-          <TaskHistory details={details} />
 
           <div className={styles.buttonsWrapper}>
             <Button
