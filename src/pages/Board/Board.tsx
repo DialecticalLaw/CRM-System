@@ -6,7 +6,7 @@ import {
 import { KanbanBoard } from "../../components/KanbanBoard/KanbanBoard";
 import { Button } from "../../components/ui/Button/Button";
 import styles from "./Board.module.scss";
-import type { Task, TaskListResponse } from "../../api/model";
+import type { Task, TaskListResponse } from "../../api/apiTypes";
 import { getTasks } from "../../api/getTasks";
 import { DeleteTaskModal } from "../../components/DeleteTaskModal/DeleteTaskModal";
 import { TaskDetails } from "../../components/TaskDetails/TaskDetails";

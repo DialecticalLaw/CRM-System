@@ -1,10 +1,7 @@
-import {
-  TASK_STATUSES,
-  type Task,
-  type TaskListResponse,
-} from "../../api/model";
+import { type Task, type TaskListResponse } from "../../api/apiTypes";
 import styles from "./KanbanBoard.module.scss";
 import { KanbanColumn } from "../KanbanColumn/KanbanColumn";
+import { TASK_STATUSES } from "../../api/constants";
 
 export function KanbanBoard({
   tasks,

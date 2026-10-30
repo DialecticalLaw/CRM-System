@@ -2,7 +2,7 @@ import { Button } from "../ui/Button/Button";
 import styles from "./DeleteTaskModal.module.scss";
 import { deleteTask } from "../../api/deleteTask";
 import { getTasks } from "../../api/getTasks";
-import type { Task, TaskListResponse } from "../../api/model";
+import type { Task, TaskListResponse } from "../../api/apiTypes";
 
 export function DeleteTaskModal({
   taskToDelete,

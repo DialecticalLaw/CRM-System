@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Task, TaskListResponse, TaskStatus } from "../../api/model";
+import type { Task, TaskListResponse, TaskStatus } from "../../api/apiTypes";
 import { TaskCard } from "../TaskCard/TaskCard";
 import styles from "./KanbanColumn.module.scss";
 import { getTasks } from "../../api/getTasks";

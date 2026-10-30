@@ -1,10 +1,9 @@
 import { useState } from "react";
 import {
-  TASK_STATUSES,
   type Task,
   type TaskListResponse,
   type TaskStatus,
-} from "../../api/model";
+} from "../../api/apiTypes";
 import { Textarea } from "../ui/inputs/Textarea/Textarea";
 import styles from "./TaskModal.module.scss";
 import { Select } from "../ui/inputs/Select/Select";
@@ -15,6 +14,7 @@ import { createTask } from "../../api/createTask";
 import { getTasks } from "../../api/getTasks";
 import { ValidationError } from "../ui/ValidationError/ValidationError";
 import { editTask } from "../../api/editTask";
+import { TASK_STATUSES } from "../../api/constants";
 
 export interface SubmitData {
   title: string;

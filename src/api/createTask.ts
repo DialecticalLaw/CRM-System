@@ -1,4 +1,4 @@
-import type { TaskRequest } from "./model";
+import type { TaskRequest } from "./apiTypes";
 
 export async function createTask(body: TaskRequest) {
   try {

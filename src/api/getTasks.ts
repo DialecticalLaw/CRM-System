@@ -1,4 +1,4 @@
-import type { TaskListResponse } from "./model";
+import type { TaskListResponse } from "./apiTypes";
 
 export async function getTasks(): Promise<TaskListResponse> {
   const response = await fetch(
