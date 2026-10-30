@@ -39,14 +39,14 @@ const STATUSES: TaskStatus[] = TASK_STATUSES.map((status) => status.value);
 
 export function TaskModal({
   isTaskModalActive,
-  setTaskModalActive,
+  setIsTaskModalActive,
   setTasks,
   taskData,
   setTaskDetails,
   setTaskToEdit,
 }: {
   isTaskModalActive: boolean;
-  setTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
   taskData: (SubmitData & { id: number }) | null;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
@@ -102,12 +102,12 @@ export function TaskModal({
 
     const updatedList = await getTasks();
     setTasks(updatedList);
-    setTaskModalActive(false);
+    setIsTaskModalActive(false);
     setData(DEFAULT_DATA);
   };
 
   const handleCancel = () => {
-    setTaskModalActive(false);
+    setIsTaskModalActive(false);
     setTaskToEdit(null);
     setData(DEFAULT_DATA);
   };

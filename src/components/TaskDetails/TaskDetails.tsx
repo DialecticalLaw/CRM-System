@@ -9,13 +9,13 @@ export function TaskDetails({
   details,
   setTaskDetails,
   setTaskToDelete,
-  setTaskModalActive,
+  setIsTaskModalActive,
   setTaskToEdit,
 }: {
   details: Task | null;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
   setTaskToDelete: React.Dispatch<React.SetStateAction<number | null>>;
-  setTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsTaskModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   setTaskToEdit: React.Dispatch<
     React.SetStateAction<
       | (SubmitData & {
@@ -89,7 +89,7 @@ export function TaskDetails({
                   status: details.status,
                   id: details.id,
                 });
-                setTaskModalActive(true);
+                setIsTaskModalActive(true);
               }}
             >
               Редактировать

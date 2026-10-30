@@ -12,7 +12,7 @@ import { DeleteTaskModal } from "../../components/DeleteTaskModal/DeleteTaskModa
 import { TaskDetails } from "../../components/TaskDetails/TaskDetails";
 
 export function Board() {
-  const [isTaskModalActive, setTaskModalActive] = useState(false);
+  const [isTaskModalActive, setIsTaskModalActive] = useState<boolean>(false);
   const [tasks, setTasks] = useState<TaskListResponse | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
   const [taskToEdit, setTaskToEdit] = useState<
@@ -33,7 +33,7 @@ export function Board() {
     <div className={styles.wrapper}>
       <div className={styles.topWrapper}>
         <h2 className={styles.title}>Доска CRM</h2>
-        <Button onClick={() => setTaskModalActive(true)}>+ Создать</Button>
+        <Button onClick={() => setIsTaskModalActive(true)}>+ Создать</Button>
       </div>
 
       <div className={styles.hr} />
@@ -45,7 +45,7 @@ export function Board() {
           tasks={tasks}
         />
         <TaskDetails
-          setTaskModalActive={setTaskModalActive}
+          setIsTaskModalActive={setIsTaskModalActive}
           setTaskToEdit={setTaskToEdit}
           details={taskDetails}
           setTaskDetails={setTaskDetails}
@@ -60,7 +60,7 @@ export function Board() {
         setTasks={setTasks}
         setTaskDetails={setTaskDetails}
         isTaskModalActive={isTaskModalActive}
-        setTaskModalActive={setTaskModalActive}
+        setIsTaskModalActive={setIsTaskModalActive}
       />
       <DeleteTaskModal
         setTasks={setTasks}
