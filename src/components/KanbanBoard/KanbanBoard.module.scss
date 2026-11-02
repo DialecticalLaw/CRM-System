@@ -1,0 +1,9 @@
+.wrapper {
+  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(7, 27rem);
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  scrollbar-width: thin;
+}

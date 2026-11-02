@@ -1,0 +1,13 @@
+.wrapper {
+  position: relative;
+  width: auto;
+  margin-bottom: 1rem;
+}
+
+.errorText {
+  position: absolute;
+  top: 100%;
+  left: 1rem;
+  color: var(--color-danger);
+  font-size: 1.2rem;
+}

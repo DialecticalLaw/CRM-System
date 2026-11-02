@@ -1,0 +1,28 @@
+.wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto 90%;
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem 2rem 0 2rem;
+}
+
+.topWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hr {
+  width: 100%;
+  height: 0.1rem;
+  background-color: var(--color-bg-tertiary);
+}
+
+.kanbanWrapper {
+  display: flex;
+  gap: 1rem;
+  max-width: 80dvw;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}

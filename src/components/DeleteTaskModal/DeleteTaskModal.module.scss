@@ -1,0 +1,55 @@
+.blackout {
+  position: fixed;
+  width: 100vw;
+  height: 100dvh;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-blackout);
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  width: max-content;
+  padding: 2rem;
+  background-color: var(--color-bg);
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+}
+
+.active {
+  display: flex;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.id {
+  color: var(--color-accent);
+  font-size: inherit;
+}
+
+.deleteBtn {
+  background-color: var(--color-danger);
+  color: #ffffff;
+
+  &:hover {
+    color: #ffffff;
+    background-color: var(--color-danger);
+    opacity: 0.8;
+  }
+  &:active {
+    color: #ffffff;
+    background-color: var(--color-danger);
+    opacity: 0.6;
+  }
+}
