@@ -15,9 +15,9 @@ export function DeleteTaskModal({
   setTasks: React.Dispatch<React.SetStateAction<TaskListResponse | null>>;
   setTaskDetails: React.Dispatch<React.SetStateAction<Task | null>>;
 }) {
-  const handleDelete = async () => {
+  async function handleDelete() {
     if (taskIdToDelete) await deleteTask(taskIdToDelete);
-  };
+  }
 
   return (
     <div

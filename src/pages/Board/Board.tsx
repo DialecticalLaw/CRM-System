@@ -16,16 +16,14 @@ export function Board() {
   const [taskDetails, setTaskDetails] = useState<Task | null>(null);
 
   useEffect(() => {
-    const load = async () => {
+    (async function () {
       const data = await getTasks();
       if (data instanceof Error) {
         alert(data.message);
         return;
       }
       setTasks(data);
-    };
-
-    load();
+    })();
   }, []);
 
   return (

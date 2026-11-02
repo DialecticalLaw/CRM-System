@@ -48,7 +48,7 @@ export function TaskModal({
   const [data, setData] = useState<TaskDataForSubmit>(taskData || DEFAULT_DATA);
   const [currentErrorText, setCurrentErrorText] = useState<string | null>(null);
 
-  const validate = () => {
+  function validate() {
     if (!data.title) {
       setCurrentErrorText("Поле обязательно для заполнения");
       return false;
@@ -62,17 +62,17 @@ export function TaskModal({
       setCurrentErrorText(null);
       return true;
     }
-  };
+  }
 
-  const handleChange = (
+  function handleChange(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >,
-  ) => {
+  ) {
     setData({ ...data, [e.target.name]: e.target.value });
-  };
+  }
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     const dataToSend = {
       ...data,
@@ -97,13 +97,13 @@ export function TaskModal({
     setTasks(updatedList);
     setIsTaskModalActive(false);
     setData(DEFAULT_DATA);
-  };
+  }
 
-  const handleCancel = () => {
+  function handleCancel() {
     setIsTaskModalActive(false);
     setTaskToEdit(null);
     setData(DEFAULT_DATA);
-  };
+  }
 
   return (
     <form

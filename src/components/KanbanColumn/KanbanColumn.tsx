@@ -23,10 +23,10 @@ export function KanbanColumn({
 }) {
   const [overColumn, setOverColumn] = useState<TaskStatus | null>(null);
 
-  const handleDrop = async (
+  async function handleDrop(
     e: React.DragEvent<HTMLDivElement>,
     nextStatus: TaskStatus,
-  ) => {
+  ) {
     e.preventDefault();
     setOverColumn(null);
     const data: unknown = JSON.parse(
@@ -51,7 +51,7 @@ export function KanbanColumn({
       return;
     }
     setTasks(updatedList);
-  };
+  }
 
   return (
     <div

@@ -14,10 +14,10 @@ export function TaskCard({
 }) {
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+  function handleDragStart(e: React.DragEvent<HTMLDivElement>) {
     e.dataTransfer.setData("application/json", JSON.stringify(data));
     requestAnimationFrame(() => setIsDragging(true));
-  };
+  }
 
   return (
     <div

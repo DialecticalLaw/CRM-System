@@ -6,7 +6,6 @@ export function App() {
   return (
     <div className={styles.app}>
       <Sidebar />
-
       <main className={styles.main}>
         <Outlet />
       </main>
