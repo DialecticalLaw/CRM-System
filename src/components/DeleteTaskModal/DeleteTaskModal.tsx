@@ -47,6 +47,10 @@ export function DeleteTaskModal({
             onClick={async () => {
               await handleDelete();
               const updatedList = await getTasks();
+              if (updatedList instanceof Error) {
+                alert(updatedList.message);
+                return;
+              }
               setTasks(updatedList);
               setTaskIdToDelete(null);
               setTaskDetails(null);

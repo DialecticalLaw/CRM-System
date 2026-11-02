@@ -1,11 +1,11 @@
 import { tasksBaseUrl } from "./constants";
 
-export async function deleteTask(id: number): Promise<void> {
+export async function deleteTask(id: number): Promise<void | Error> {
   try {
     await fetch(`${tasksBaseUrl}${id}`, {
       method: "DELETE",
     });
   } catch (error) {
-    console.error(error);
+    return error as Error;
   }
 }

@@ -4,7 +4,7 @@ import { tasksBaseUrl } from "./constants";
 export async function editTask(
   body: TaskRequest,
   id: number,
-): Promise<Task | undefined> {
+): Promise<Task | Error> {
   try {
     const editedTask: Response = await fetch(`${tasksBaseUrl}${id}`, {
       method: "PUT",
@@ -12,6 +12,6 @@ export async function editTask(
     });
     return await editedTask.json();
   } catch (error) {
-    console.error(error);
+    return error as Error;
   }
 }

@@ -18,6 +18,10 @@ export function Board() {
   useEffect(() => {
     const load = async () => {
       const data = await getTasks();
+      if (data instanceof Error) {
+        alert(data.message);
+        return;
+      }
       setTasks(data);
     };
 

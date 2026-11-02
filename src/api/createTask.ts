@@ -1,7 +1,7 @@
 import type { Task, TaskRequest } from "../types";
 import { tasksBaseUrl } from "./constants";
 
-export async function createTask(body: TaskRequest): Promise<Task | undefined> {
+export async function createTask(body: TaskRequest): Promise<Task | Error> {
   try {
     const createdTask: Response = await fetch(tasksBaseUrl, {
       method: "POST",
@@ -9,6 +9,6 @@ export async function createTask(body: TaskRequest): Promise<Task | undefined> {
     });
     return await createdTask.json();
   } catch (error) {
-    console.error(error);
+    return error as Error;
   }
 }

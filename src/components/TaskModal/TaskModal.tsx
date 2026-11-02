@@ -90,6 +90,10 @@ export function TaskModal({
     } else await createTask(dataToSend);
 
     const updatedList = await getTasks();
+    if (updatedList instanceof Error) {
+      alert(updatedList.message);
+      return;
+    }
     setTasks(updatedList);
     setIsTaskModalActive(false);
     setData(DEFAULT_DATA);

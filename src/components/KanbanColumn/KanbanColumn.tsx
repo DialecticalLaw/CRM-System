@@ -46,6 +46,10 @@ export function KanbanColumn({
     );
 
     const updatedList = await getTasks();
+    if (updatedList instanceof Error) {
+      alert(updatedList.message);
+      return;
+    }
     setTasks(updatedList);
   };
 
